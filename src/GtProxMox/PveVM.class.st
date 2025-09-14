@@ -40,20 +40,6 @@ PveVM >> currentStatus [
 ]
 
 { #category : #'as yet unclassified' }
-PveVM >> gtActionsFor: aView [
-	<gtView>
-	^ aView actionList
-		title: 'Actions';
-		items: [ {
-			'Start VM' -> [ self start ].
-			'Stop VM' -> [ self stop ].
-			'Refresh Status' -> [ self currentStatus ]
-		} ];
-		itemText: #key;
-		itemAction: [ :item | item value value ]
-]
-
-{ #category : #'as yet unclassified' }
 PveVM >> gtConfigFor: aView [
 	<gtView>
 	^ aView columnedList
