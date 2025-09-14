@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-14T12:24:26.643971+02:00"
+						"dateAndTimeString" : "2025-09-14T14:18:00.203242+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "In the file, have three lines with the \nhost:port\nuser@realm!"
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -66,14 +66,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-14T12:25:45.088093+02:00"
+						"dateAndTimeString" : "2025-09-14T13:03:27.916204+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "X2i7CSL7DQCNka+RDLqrGA=="
 				},
-				"code" : "cluster := PveCluster connectFrom: aFileName"
+				"code" : "cluster := PveCluster connectFrom: '/home/stephan/Sensus/prox/apitoken.txt' "
 			}
 		]
 	},

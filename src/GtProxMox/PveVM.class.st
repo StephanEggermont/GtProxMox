@@ -23,11 +23,8 @@ PveVM >> client: aZnClient [
 { #category : #'as yet unclassified' }
 PveVM >> config [
 	"Get VM configuration"
-	| url response |
-	url := 'https://', client url host, '/api2/json/nodes/', node name, '/qemu/', self vmid asString, '/config'.
-	client url: url.
-	response := client get.
-	^ (STONJSON fromString: response) at: 'data'
+
+	^ (api get:'nodes/', node name, '/qemu/', self vmid asString, '/config' )
 ]
 
 { #category : #'as yet unclassified' }
@@ -39,11 +36,7 @@ PveVM >> cpuUsage [
 { #category : #'as yet unclassified' }
 PveVM >> currentStatus [
 	"Get detailed current status"
-	| url response |
-	url := 'https://', client url host, '/api2/json/nodes/', node name, '/qemu/', self vmid asString, '/status/current'.
-	client url: url.
-	response := client get.
-	^ (STONJSON fromString: response) at: 'data'
+	^ api get: 'nodes/', node name, '/qemu/', self vmid asString, '/status/current'.
 ]
 
 { #category : #'as yet unclassified' }

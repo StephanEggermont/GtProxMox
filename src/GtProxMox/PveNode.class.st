@@ -24,6 +24,7 @@ PveNode >> cluster: aCluster [
 PveNode >> containers [
 	"Fetch containers for this node" 
 	| data |
+	self isRunning ifFalse: [^#()].
 	data := api get: 'nodes/', self name, '/lxc'.
 	
 	^ data collect: [ :ctData |
@@ -86,6 +87,11 @@ PveNode >> gtVMsFor: aView [
 ]
 
 { #category : #'as yet unclassified' }
+PveNode >> isRunning [
+	^self status = 'online'
+]
+
+{ #category : #'as yet unclassified' }
 PveNode >> maxMemory [
 	^ self rawData at: 'maxmem' ifAbsent: [ 1 ]
 ]
@@ -127,6 +133,7 @@ PveNode >> status [
 PveNode >> vms [
 	"Fetch VMs for this node"
 	| data |
+	self isRunning ifFalse: [^#()].
 	data :=  (api get: 'nodes/', self name, '/qemu') .
 	
 	^ data collect: [ :vmData |

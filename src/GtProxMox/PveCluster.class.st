@@ -58,11 +58,11 @@ PveCluster >> gtOverviewFor: aView [
 		text: [ 
 			String streamContents: [ :s |
 				s nextPutAll: 'Proxmox Cluster Overview'; cr; cr.
-				s nextPutAll: 'Nodes: ', self nodes size asString; cr.
+"				s nextPutAll: 'Nodes: ', self nodes size asString; cr.
 				self nodes do: [ :node |
 					s nextPutAll: '  • ', node name, ' (', node status, ')'; cr ].
 				s cr.
-				s nextPutAll: 'Total VMs: ', self totalVMs asString; cr.
+"				s nextPutAll: 'Total VMs: ', self totalVMs asString; cr.
 				s nextPutAll: 'Running VMs: ', self runningVMs asString; cr ] ]
 ]
 
