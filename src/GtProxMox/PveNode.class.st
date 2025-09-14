@@ -83,7 +83,25 @@ PveNode >> gtVMsFor: aView [
 			vm cpuUsage ifNotNil: [ :usage | 
 				(usage * 100) rounded asString, '%' ] ifNil: [ 'N/A' ] ];
 		column: 'Memory' text: [ :vm | vm memoryDisplay ];
+		column: 'Actions'
+			stencil: [ :vm :anIndex | 
+				vm status = 'running' 
+					ifTrue: [ BlElement new size: 0 @ 0 ]
+					ifFalse: [  BrHorizontalPane new
+						fitContent;
+						in: [ :aPane | 
+							aPane
+								addChild: (BrButton new
+									fitContent;
+									aptitude: BrGlamorousButtonWithIconAndLabelAptitude;
+									margin: (BlInsets right: 5);
+									icon: BrGlamorousIcons add;
+									label: 'Start';
+									action: [ :aButton | 
+										vm start.
+									aButton phlow fireToolUpdateWish ])]]];
 		actionUpdateButton
+
 ]
 
 { #category : #'as yet unclassified' }

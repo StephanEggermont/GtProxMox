@@ -44,3 +44,13 @@ PveApi >> getStatus [
 	client url: baseUrl, 'cluster/status'.
 	^client get
 ]
+
+{ #category : #'as yet unclassified' }
+PveApi >> post: path [
+	| json dictionary data |
+	client url: baseUrl , path.
+	json := client post.
+	dictionary := STONJSON fromString: json.
+	data := dictionary at: 'data'.
+	^data
+]

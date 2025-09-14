@@ -123,11 +123,7 @@ PveVM >> rawData: vmData [
 { #category : #'as yet unclassified' }
 PveVM >> start [
 	"Start the VM"
-	| url response |
-	url := 'https://', client url host, '/api2/json/nodes/', node name, '/qemu/', self vmid asString, '/status/start'.
-	client url: url.
-	response := client post.
-	^ (STONJSON fromString: response) at: 'data'
+	^ api post: 'nodes/', node name, '/qemu/', self vmid asString, '/status/start'.
 ]
 
 { #category : #'as yet unclassified' }
@@ -138,11 +134,7 @@ PveVM >> status [
 { #category : #'as yet unclassified' }
 PveVM >> stop [
 	"Stop the VM"
-	| url response |
-	url := 'https://', client url host, '/api2/json/nodes/', node name, '/qemu/', self vmid asString, '/status/stop'.
-	client url: url.
-	response := client post.
-	^ (STONJSON fromString: response) at: 'data'
+	^ api post: 'nodes/', node name, '/qemu/', self vmid asString, '/status/stop'.
 ]
 
 { #category : #'as yet unclassified' }
