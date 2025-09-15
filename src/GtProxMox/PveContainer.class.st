@@ -21,8 +21,36 @@ PveContainer >> client: aZnClient [
 ]
 
 { #category : #'as yet unclassified' }
-PveContainer >> memoryDisplay [
+PveContainer >> gtStatusFor: aView [
+	<gtView>
+	^ aView textEditor
+		title: 'Status';
+		priority: 10;
+		text: [
+			String streamContents: [ :s |
+				s nextPutAll: 'VM ID: ', self vmid asString; cr.
+				s nextPutAll: 'Name: ', self name; cr.
+				s nextPutAll: 'Status: ', self status asString; cr.
+				s nextPutAll: 'Memory: ', self memoryDisplay; cr.
+
+	]]
+]
+
+{ #category : #'as yet unclassified' }
+PveContainer >> maxMemory [
+	^ self rawData at: 'maxmem' ifAbsent: [ 1 ]
+
+]
+
+{ #category : #'as yet unclassified' }
+PveContainer >> memory [
 	^ self rawData at: 'mem' ifAbsent: [ 0 ]
+]
+
+{ #category : #'as yet unclassified' }
+PveContainer >> memoryDisplay [
+	^ (self memory // (1024*1024)) asString, 'MB / ', 
+		(self maxMemory // (1024*1024)) asString, 'MB'
 ]
 
 { #category : #'as yet unclassified' }
