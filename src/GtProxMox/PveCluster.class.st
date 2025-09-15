@@ -28,6 +28,12 @@ PveCluster >> api: anApi [
 	api := anApi 
 ]
 
+{ #category : #'as yet unclassified' }
+PveCluster >> colorForVm: aVm [
+	^aVm status = 'running' ifTrue: [Color green alpha: 0.3]
+	ifFalse: [Color red alpha: 0.3]
+]
+
 { #category : #accessing }
 PveCluster >> get [
 	self rawData: (api get: 'cluster/resources')
@@ -74,17 +80,22 @@ PveCluster >> gtResourcesMapFor: aView [
 	^ aView mondrian
 		title: 'Resources Map';
 		priority: 30;
-		painting: [ :mondrian |
+		painting: [ :mondrian | 
+			| nodes |
+			nodes := self nodes.
+			mondrian nodes 
+		shape: [ :each | GtMondrianUMLClassElement withDefaultContainer 
+			label: (each name) asString ];
+		with: nodes;
+		forEach: [:node |
 			mondrian nodes
-				shape: [ :node |
-					BlElement new
-						geometry: BlRoundedRectangleGeometry new;
-						size: 120 @ 80;
-						background: (node status = 'online' 
-							ifTrue: [ Color green alpha: 0.3 ]
-							ifFalse: [ Color red alpha: 0.3 ]) ];
-				with: self nodes.
-			mondrian layout grid ]
+				shape: [ :me | BlElement new 
+				background: (self colorForVm: me);
+				border: (BlBorder paint: Color gray);
+				size: (10 @10);
+				yourself  ];
+			with: (node vms) ]in: #default.
+		mondrian layout grid ]
 ]
 
 { #category : #'as yet unclassified' }
