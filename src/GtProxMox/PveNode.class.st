@@ -46,6 +46,7 @@ PveNode >> gtContainersFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Containers';
+		priority: 30;
 		items: [ self containers ];
 		column: 'ID' text: [ :ct | ct vmid ];
 		column: 'Name' text: [ :ct | ct name ];
@@ -59,6 +60,7 @@ PveNode >> gtDetailsFor: aView [
 	<gtView>
 	^ aView textEditor
 		title: 'Details';
+		priority: 10;
 		text: [
 			String streamContents: [ :s |
 				s nextPutAll: 'Node: ', self name; cr.
@@ -75,6 +77,7 @@ PveNode >> gtVMsFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'VMs';
+		priority: 20;
 		items: [ self vms ];
 		column: 'ID' text: [ :vm | vm vmid ];
 		column: 'Name' text: [ :vm | vm name ];
@@ -154,10 +157,10 @@ PveNode >> vms [
 	self isRunning ifFalse: [^#()].
 	data :=  (api get: 'nodes/', self name, '/qemu') .
 	
-	^ data collect: [ :vmData |
+	^ (data collect: [ :vmData |
 		PveVM new
 			rawData: vmData;
 			node: self;
 			api: api;
-			yourself ]
+			yourself ]) sorted: [:a :b | a vmid < b vmid]
 ]

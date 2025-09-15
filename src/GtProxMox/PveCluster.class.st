@@ -38,6 +38,7 @@ PveCluster >> gtNodesFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Nodes';
+		priority: 20;
 		items: [ self nodes ];
 		column: 'Name' text: [ :node | node name ];
 		column: 'Status' text: [ :node | node status ];
@@ -55,6 +56,7 @@ PveCluster >> gtOverviewFor: aView [
 	<gtView>
 	^ aView textEditor
 		title: 'Overview';
+		priority: 10;
 		text: [ 
 			String streamContents: [ :s |
 				s nextPutAll: 'Proxmox Cluster Overview'; cr; cr.
@@ -64,6 +66,25 @@ PveCluster >> gtOverviewFor: aView [
 				s cr.
 "				s nextPutAll: 'Total VMs: ', self totalVMs asString; cr.
 				s nextPutAll: 'Running VMs: ', self runningVMs asString; cr ] ]
+]
+
+{ #category : #'as yet unclassified' }
+PveCluster >> gtResourcesMapFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Resources Map';
+		priority: 30;
+		painting: [ :mondrian |
+			mondrian nodes
+				shape: [ :node |
+					BlElement new
+						geometry: BlRoundedRectangleGeometry new;
+						size: 120 @ 80;
+						background: (node status = 'online' 
+							ifTrue: [ Color green alpha: 0.3 ]
+							ifFalse: [ Color red alpha: 0.3 ]) ];
+				with: self nodes.
+			mondrian layout grid ]
 ]
 
 { #category : #'as yet unclassified' }

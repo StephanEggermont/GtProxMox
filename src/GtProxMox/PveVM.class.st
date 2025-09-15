@@ -44,6 +44,7 @@ PveVM >> gtConfigFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Config';
+		priority: 20;
 		items: [ self config associations ];
 		column: 'Key' text: #key;
 		column: 'Value' text: #value;
@@ -55,6 +56,7 @@ PveVM >> gtStatusFor: aView [
 	<gtView>
 	^ aView textEditor
 		title: 'Status';
+		priority: 10;
 		text: [
 			| status |
 			status := self currentStatus.
