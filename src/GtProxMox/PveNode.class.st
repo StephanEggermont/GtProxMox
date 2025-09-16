@@ -82,29 +82,14 @@ PveNode >> gtVMsFor: aView [
 		column: 'ID' text: [ :vm | vm vmid ];
 		column: 'Name' text: [ :vm | vm name ];
 		column: 'Status' text: [ :vm | vm status ];
-		column: 'CPU' text: [ :vm | 
-			vm cpuUsage ifNotNil: [ :usage | 
-				(usage * 100) rounded asString, '%' ] ifNil: [ 'N/A' ] ];
+		column: 'CPU'
+			text: [ :vm | 
+				vm cpuUsage
+					ifNotNil: [ :usage | (usage * 100) rounded asString , '%' ]
+					ifNil: [ 'N/A' ] ];
 		column: 'Memory' text: [ :vm | vm memoryDisplay ];
-		column: 'Actions'
-			stencil: [ :vm :anIndex | 
-				vm status = 'running' 
-					ifTrue: [ BlElement new size: 0 @ 0 ]
-					ifFalse: [  BrHorizontalPane new
-						fitContent;
-						in: [ :aPane | 
-							aPane
-								addChild: (BrButton new
-									fitContent;
-									aptitude: BrGlamorousButtonWithIconAndLabelAptitude;
-									margin: (BlInsets right: 5);
-									icon: BrGlamorousIcons add;
-									label: 'Start';
-									action: [ :aButton | 
-										vm start.
-									aButton phlow fireToolUpdateWish ])]]];
+		column: 'Actions' stencil: [ :vm :anIndex | self startOrStopActionOn: vm ];
 		actionUpdateButton
-
 ]
 
 { #category : #'as yet unclassified' }
@@ -143,6 +128,37 @@ PveNode >> rawData [
 { #category : #'as yet unclassified' }
 PveNode >> rawData: nodeData [ 
 	rawData := nodeData
+]
+
+{ #category : #'as yet unclassified' }
+PveNode >> startOrStopActionOn: vm [
+	^ vm status = 'running'
+		ifTrue: [ BrHorizontalPane new
+				fitContent;
+				in: [ :aPane | 
+					aPane
+						addChild: (BrButton new
+								fitContent;
+								aptitude: BrGlamorousButtonWithIconAndLabelAptitude;
+								margin: (BlInsets right: 5);
+								icon: BrGlamorousIcons cancel;
+								label: 'Stop';
+								action: [ :aButton | 
+									vm stop.
+									aButton phlow fireToolUpdateWish ]) ] ]
+		ifFalse: [ BrHorizontalPane new
+				fitContent;
+				in: [ :aPane | 
+					aPane
+						addChild: (BrButton new
+								fitContent;
+								aptitude: BrGlamorousButtonWithIconAndLabelAptitude;
+								margin: (BlInsets right: 5);
+								icon: BrGlamorousIcons play;
+								label: 'Start';
+								action: [ :aButton | 
+									vm start.
+									aButton phlow fireToolUpdateWish ]) ] ]
 ]
 
 { #category : #'as yet unclassified' }

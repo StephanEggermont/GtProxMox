@@ -100,14 +100,15 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-15T10:43:05.242484+02:00"
+						"dateAndTimeString" : "2025-09-15T15:24:54.717785+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "pBlbujT7DQCJYYRAB41IVw=="
 				},
-				"code" : "ls"
+				"code" : "ssh pet2 <<'ENDSSH'\rhostname\rls -al\rENDSSH",
+				"bindingName" : "cluster"
 			}
 		]
 	},
