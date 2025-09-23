@@ -84,7 +84,7 @@ PveCluster >> gtResourcesMapFor: aView [
 			| nodes |
 			nodes := self nodes.
 			mondrian nodes 
-		shape: [ :each | GtMondrianUMLClassElement withDefaultContainer 
+		shape: [ :each | (GtMondrianUMLClassElement withContainers: #(vms containers))
 			label: (each name) asString ];
 		with: nodes;
 		forEach: [:node |
@@ -94,7 +94,15 @@ PveCluster >> gtResourcesMapFor: aView [
 				border: (BlBorder paint: Color gray);
 				size: (10 @10);
 				yourself  ];
-			with: (node vms) ]in: #default.
+			with: (node vms) ] in: #vms;
+		forEach: [:node |
+			mondrian nodes
+				shape: [ :me | BlElement new 
+				background: (self colorForVm: me);
+				border: (BlBorder paint: Color gray);
+				size: (10 @10);
+				yourself  ];
+			with: (node containers) ] in: #containers.			.
 		mondrian layout grid ]
 ]
 
