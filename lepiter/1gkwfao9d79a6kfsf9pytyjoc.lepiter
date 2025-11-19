@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-14T12:23:59.591953+02:00"
+						"dateAndTimeString" : "2025-10-29T11:21:30.788032+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "\nLet's use API token authentication. Create an API Token in the web interface\n1 Login and navigate to datacenter -> permissions -> API tokens\n2 Click add and create a token for your user. \n3 For now uncheck privilege separation"
+				"string" : "Let's use API token authentication. Create an API Token in the web interface\n1 Login and navigate to datacenter -> permissions -> API tokens\n2 Click add and create a token for your user. \n3 For now uncheck privilege separation"
 			},
 			{
 				"__type" : "pharoSnippet",
