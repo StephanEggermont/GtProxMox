@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-14T14:18:25.439959+02:00"
+						"dateAndTimeString" : "2025-10-29T11:25:10.989629+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "In the file, have three lines with \n\nhost:port\nuser@realm!tokenid\ntokensecret\n"
+				"string" : "In the file, have three lines with \n\nhost:port\nuser@realm!tokenid\ntokensecret\n\nInspect the cluster"
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -66,49 +66,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-14T13:03:27.916204+02:00"
+						"dateAndTimeString" : "2025-10-29T11:22:33.991976+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "X2i7CSL7DQCNka+RDLqrGA=="
 				},
-				"code" : "cluster := PveCluster connectFrom: '/home/stephan/Sensus/prox/apitoken.txt' "
-			},
-			{
-				"__type" : "shellCommandSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-15T10:43:00.642828+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-09-15T15:24:54.717785+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "pBlbujT7DQCJYYRAB41IVw=="
-				},
-				"code" : "ssh pet2 <<'ENDSSH'\rhostname\rls -al\rENDSSH",
-				"bindingName" : "cluster"
+				"code" : "tokenFilename := '/home/stephan/Sensus/prox/apitoken.txt'.\rcluster := PveCluster connectFrom: tokenFilename"
 			}
 		]
 	},
