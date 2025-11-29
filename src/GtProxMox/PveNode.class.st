@@ -73,6 +73,18 @@ PveNode >> gtDetailsFor: aView [
 ]
 
 { #category : #'as yet unclassified' }
+PveNode >> gtPairsFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Pairs';
+		priority: 35;
+		items: [ self rawData associations ];
+		column: 'Key' text: #key;
+		column: 'Value' text: #value;
+		actionUpdateButton
+]
+
+{ #category : #'as yet unclassified' }
 PveNode >> gtVMsFor: aView [
 	<gtView>
 	^ aView columnedList

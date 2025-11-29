@@ -21,6 +21,37 @@ PveContainer >> client: aZnClient [
 ]
 
 { #category : #'as yet unclassified' }
+PveContainer >> disk [
+	^self rawData at: #disk ifAbsent: [0]
+]
+
+{ #category : #'as yet unclassified' }
+PveContainer >> diskDisplay [
+	|used available|
+	used := self disk // (1024* 1024).
+	used := (used > 1024) ifTrue: [
+		(used // 1024) asString, 'GB']
+	ifFalse: [used asString, 'MB'].
+	available := self maxDisk // (1024* 1024).
+	available := (available > 1024) ifTrue: [
+		(available // 1024) asString, 'GB']
+	ifFalse: [available asString, 'MB'].
+	^ used,' / ', available
+]
+
+{ #category : #'as yet unclassified' }
+PveContainer >> gtPairsFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Pairs';
+		priority: 15;
+		items: [ self rawData associations ];
+		column: 'Key' text: #key;
+		column: 'Value' text: #value;
+		actionUpdateButton
+]
+
+{ #category : #'as yet unclassified' }
 PveContainer >> gtStatusFor: aView [
 	<gtView>
 	^ aView textEditor
@@ -32,8 +63,14 @@ PveContainer >> gtStatusFor: aView [
 				s nextPutAll: 'Name: ', self name; cr.
 				s nextPutAll: 'Status: ', self status asString; cr.
 				s nextPutAll: 'Memory: ', self memoryDisplay; cr.
+				s nextPutAll: 'Disk: ', self diskDisplay; cr.
 
 	]]
+]
+
+{ #category : #'as yet unclassified' }
+PveContainer >> maxDisk [
+	^self rawData at: #maxdisk ifAbsent: [0]
 ]
 
 { #category : #'as yet unclassified' }
